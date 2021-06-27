@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 @SpringBootTest
@@ -72,6 +73,18 @@ class MpdemoApplicationTests {
     public void testSelect1() {
         List<User> users = userMapper.selectBatchIds(Arrays.asList(1L, 2L, 3L));
         System.out.println(users);
+    }
+
+    @Test
+    public void testSelectByMap() {
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", "Jack");
+        map.put("age", 18);
+        List<User> users = userMapper.selectByMap(map);
+
+        users.forEach(System.out::println);
+
     }
 
 }

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Date;
 import java.util.List;
 
 @SpringBootTest
@@ -31,13 +30,13 @@ class MpdemoApplicationTests {
     public void addUser() {
 
         User user = new User();
-        user.setName("Andy");
-        user.setAge(20);
-        user.setEmail("Andy@sina.com");
+        user.setName("Jerry");
+        user.setAge(21);
+        user.setEmail("Jerry@sina.com");
 
         // 手动设置
-        user.setCreateTime(new Date());
-        user.setUpdateTime(new Date());
+//        user.setCreateTime(new Date());
+//        user.setUpdateTime(new Date());
 
         int insert = userMapper.insert(user);
         System.out.println(insert);
@@ -49,8 +48,8 @@ class MpdemoApplicationTests {
     @Test
     public void updateUser() {
         User user = new User();
-        user.setId(2L);
-        user.setAge(88);
+        user.setId(1408999156663525378L);
+        user.setAge(18);
 
         int row = userMapper.updateById(user);
         System.out.println(row);

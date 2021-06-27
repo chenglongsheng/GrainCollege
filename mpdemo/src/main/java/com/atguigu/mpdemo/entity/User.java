@@ -1,6 +1,8 @@
 package com.atguigu.mpdemo.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
@@ -29,6 +31,11 @@ public class User {
     private String name;
     private Integer age;
     private String email;
+
+    // 第一步：在实体类里面进行自动填充属性添加注解
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 }

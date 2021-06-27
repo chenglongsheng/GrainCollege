@@ -24,7 +24,7 @@ public class User {
     NONE：无策略，输入
     UUID：随机唯一值
      */
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.ID_WORKER)
     private Long id;
     private String name;
     private Integer age;

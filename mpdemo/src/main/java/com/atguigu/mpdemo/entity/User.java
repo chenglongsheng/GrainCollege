@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @author chenglongsheng
  * @create 2021-06-26 22:56
@@ -27,4 +29,6 @@ public class User {
     private String name;
     private Integer age;
     private String email;
+    private Date createTime;
+    private Date updateTime;
 }

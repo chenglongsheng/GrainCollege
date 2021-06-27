@@ -118,4 +118,11 @@ class MpdemoApplicationTests {
         System.out.println(i);
     }
 
+    // 批量删除
+    @Test
+    public void testDeleteBatchIds() {
+        final int result = userMapper.deleteBatchIds(Arrays.asList(2, 3));
+        System.out.println(result);
+    }
+
 }

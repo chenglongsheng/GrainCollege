@@ -30,7 +30,7 @@ class MpdemoApplicationTests {
     public void addUser() {
 
         User user = new User();
-        user.setName("Jerry");
+        user.setName("中古");
         user.setAge(21);
         user.setEmail("Jerry@sina.com");
 
@@ -55,4 +55,14 @@ class MpdemoApplicationTests {
         System.out.println(row);
     }
 
+    // 测试乐观锁
+    // 先查询再修改
+    @Test
+    public void testOptimisticLocker() {
+        // 根据id查数据
+        User user = userMapper.selectById(1409153028505853953L);
+        // 修改
+        user.setName("任盈盈");
+        userMapper.updateById(user);
+    }
 }

@@ -23,4 +23,19 @@ class MpdemoApplicationTests {
         System.out.println(users);
     }
 
+    /*
+    添加用户
+     */
+    @Test
+    public void addUser() {
+
+        User user = new User();
+        user.setName("Andy");
+        user.setAge(20);
+        user.setEmail("Andy@sina.com");
+
+        int insert = userMapper.insert(user);
+        System.out.println(insert);
+    }
+
 }

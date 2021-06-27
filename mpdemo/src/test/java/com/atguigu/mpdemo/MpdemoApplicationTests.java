@@ -2,6 +2,7 @@ package com.atguigu.mpdemo;
 
 import com.atguigu.mpdemo.entity.User;
 import com.atguigu.mpdemo.mapper.UserMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -84,6 +85,29 @@ class MpdemoApplicationTests {
         List<User> users = userMapper.selectByMap(map);
 
         users.forEach(System.out::println);
+
+    }
+
+    // 分页查询
+    @Test
+    public void testPage() {
+
+        //1.创建page对象
+        //传入两个参数：当前页 和 每页显示的记录数
+        Page<User> userPage = new Page<>(1,3);
+        // 调用mp的分页查询方法
+        // 调用mp分页查询的过程中，底层封装，把分页所有数据封装到userPage对象里面
+        userMapper.selectPage(userPage, null);
+
+        // 通过userPage对象获取分页数据
+        System.out.println(userPage.getCurrent());// 当前页
+        System.out.println(userPage.getRecords());// 每页数据list集合
+        System.out.println(userPage.getPages());// 总页数
+        System.out.println(userPage.getSize());// 每页显示记录数
+        System.out.println(userPage.getTotal());// 总记录数
+
+        System.out.println(userPage.hasNext());// 下一页
+        System.out.println(userPage.hasPrevious());// 上一页
 
     }
 

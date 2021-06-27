@@ -38,4 +38,17 @@ class MpdemoApplicationTests {
         System.out.println(insert);
     }
 
+    /*
+    修改操作
+     */
+    @Test
+    public void updateUser() {
+        User user = new User();
+        user.setId(2L);
+        user.setAge(88);
+
+        int row = userMapper.updateById(user);
+        System.out.println(row);
+    }
+
 }

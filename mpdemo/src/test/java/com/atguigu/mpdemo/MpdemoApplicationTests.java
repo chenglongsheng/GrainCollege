@@ -94,7 +94,7 @@ class MpdemoApplicationTests {
 
         //1.创建page对象
         //传入两个参数：当前页 和 每页显示的记录数
-        Page<User> userPage = new Page<>(1,3);
+        Page<User> userPage = new Page<>(1, 3);
         // 调用mp的分页查询方法
         // 调用mp分页查询的过程中，底层封装，把分页所有数据封装到userPage对象里面
         userMapper.selectPage(userPage, null);
@@ -109,6 +109,13 @@ class MpdemoApplicationTests {
         System.out.println(userPage.hasNext());// 下一页
         System.out.println(userPage.hasPrevious());// 上一页
 
+    }
+
+    // 物理删除
+    @Test
+    public void testDeleteById() {
+        int i = userMapper.deleteById(1L);
+        System.out.println(i);
     }
 
 }

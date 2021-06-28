@@ -2,6 +2,7 @@ package com.atguigu.mpdemo;
 
 import com.atguigu.mpdemo.entity.User;
 import com.atguigu.mpdemo.mapper.UserMapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,6 +124,40 @@ class MpdemoApplicationTests {
     public void testDeleteBatchIds() {
         final int result = userMapper.deleteBatchIds(Arrays.asList(2, 3));
         System.out.println(result);
+    }
+
+    // mp实现复杂查询操作
+    @Test
+    public void testSelectQuery() {
+
+        // 创建QueryWrapper对象
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+
+        // 通过QueryWrapper设置条件
+        // ge、gt、le、lt     >= > <= <
+        // 查询age大于等于50
+//        wrapper.ge("age", 50);
+
+        // eq、ne
+//        wrapper.eq("name","任盈盈");
+
+        // between 范围查询
+//        wrapper.between("age", 20, 500);
+
+        // like 模糊查询
+//        wrapper.like("n");
+
+        // OrderByDesc
+//        wrapper.orderByDesc("id");
+
+        // last 语句最后拼接SQL语句
+//        wrapper.last("limit 1");
+
+        // select 指定要查询的列
+        wrapper.select("id","name");
+
+        List<User> users = userMapper.selectList(wrapper);
+        System.out.println(users);
     }
 
 }

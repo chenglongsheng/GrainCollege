@@ -33,8 +33,8 @@ class MpdemoApplicationTests {
     public void addUser() {
 
         User user = new User();
-        user.setName("中古");
-        user.setAge(21);
+        user.setName("上古");
+        user.setAge(30);
         user.setEmail("Jerry@sina.com");
 
         // 手动设置

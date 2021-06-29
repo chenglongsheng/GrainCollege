@@ -4,9 +4,7 @@ package com.atguigu.eduservice.controller;
 import com.atguigu.eduservice.entity.EduTeacher;
 import com.atguigu.eduservice.service.EduTeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,8 +28,15 @@ public class EduTeacherController {
     //rest风格
     @GetMapping("/findAll")
     public List<EduTeacher> findAllTeacher() {
-        final List<EduTeacher> list = teacherService.list(null);
+        List<EduTeacher> list = teacherService.list(null);
         return list;
+    }
+
+    //2.逻辑删除讲师方法
+    @DeleteMapping("{id}")//通过路径传值
+    public boolean remove(@PathVariable String id) {//@PathVariable String id 获取路径中的id
+        boolean flag = teacherService.removeById(id);
+        return flag;
     }
 
 }

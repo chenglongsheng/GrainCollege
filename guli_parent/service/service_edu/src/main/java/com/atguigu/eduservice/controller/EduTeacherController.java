@@ -4,6 +4,7 @@ package com.atguigu.eduservice.controller;
 import com.atguigu.commonutils.Result;
 import com.atguigu.eduservice.entity.EduTeacher;
 import com.atguigu.eduservice.service.EduTeacherService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -48,6 +49,27 @@ public class EduTeacherController {
         } else {
             return Result.error();
         }
+    }
+
+    //3.分页查询讲师
+    @ApiOperation(value = "分页讲师列表")
+    @GetMapping("/page/{current}/{limit}")
+    public Result pageList(
+            @ApiParam(name = "current", value = "当前页码", required = true)
+            @PathVariable long current,
+            @ApiParam(name = "limit", value = "每页记录数", required = true)
+            @PathVariable long limit) {
+
+        //创建page对象
+        Page<EduTeacher> pageTeacher = new Page<>(current, limit);
+
+        //调用方法实现分页，底层会封装，把分页所有数据封装到pageTeacher
+        teacherService.page(pageTeacher, null);
+
+        long total = pageTeacher.getTotal();//总记录数
+        List<EduTeacher> records = pageTeacher.getRecords();//数据list集合
+
+        return Result.ok().data("total", total).data("records", records);
     }
 
 }

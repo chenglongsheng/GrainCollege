@@ -3,12 +3,15 @@ package com.atguigu.eduservice.controller;
 
 import com.atguigu.commonutils.Result;
 import com.atguigu.eduservice.entity.EduTeacher;
+import com.atguigu.eduservice.entity.vo.TeacherQuery;
 import com.atguigu.eduservice.service.EduTeacherService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -69,7 +72,53 @@ public class EduTeacherController {
         long total = pageTeacher.getTotal();//总记录数
         List<EduTeacher> records = pageTeacher.getRecords();//数据list集合
 
-        return Result.ok().data("total", total).data("records", records);
+        return Result.ok().data("total", total).data("rows", records);
+    }
+
+    //4.条件查询带分页的方法
+    @PostMapping("/pageTeacherCondition/{current}/{limit}")
+    public Result pageTeacherCondition(
+            /*
+            RequestBody(需要使用post提交方式)
+                使用json传递数据，把json数据封装到对应对象里面
+            ResponseBody
+                返回数据，返回json数据
+            @RequestBody(required = false) 参数值可以为空
+             */
+            @PathVariable long current,
+            @PathVariable long limit,
+            @RequestBody(required = false) TeacherQuery teacherQuery) {
+
+        //创建page对象
+        Page<EduTeacher> pageTeacher = new Page<>(current, limit);
+        //构建条件
+        QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
+
+        //多条组合查询
+        String name = teacherQuery.getName();
+        Integer level = teacherQuery.getLevel();
+        String begin = teacherQuery.getBegin();
+        String end = teacherQuery.getEnd();
+        //不为空，则拼接条件
+        if (!StringUtils.isEmpty(name)) {
+            wrapper.like("name", name);
+        }
+        if (!StringUtils.isEmpty(level)) {
+            wrapper.eq("level", level);
+        }
+        if (!StringUtils.isEmpty(begin)) {
+            wrapper.ge("gmt_create", begin);
+        }
+        if (!StringUtils.isEmpty(end)) {
+            wrapper.le("gmt_modified", end);
+        }
+
+        //调用方法实现条件查询分页
+        teacherService.page(pageTeacher, wrapper);
+
+        long total = pageTeacher.getTotal();//总记录数
+        List<EduTeacher> records = pageTeacher.getRecords();//数据list集合
+        return Result.ok().data("total", total).data("rows", records);
     }
 
 }

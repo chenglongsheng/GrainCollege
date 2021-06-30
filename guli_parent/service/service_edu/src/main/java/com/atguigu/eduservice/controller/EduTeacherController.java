@@ -1,6 +1,7 @@
 package com.atguigu.eduservice.controller;
 
 
+import com.atguigu.commonutils.Result;
 import com.atguigu.eduservice.entity.EduTeacher;
 import com.atguigu.eduservice.service.EduTeacherService;
 import io.swagger.annotations.Api;
@@ -32,17 +33,21 @@ public class EduTeacherController {
     //rest风格
     @ApiOperation(value = "所有讲师列表")
     @GetMapping("/findAll")
-    public List<EduTeacher> findAllTeacher() {
+    public Result findAllTeacher() {
         List<EduTeacher> list = teacherService.list(null);
-        return list;
+        return Result.ok().data("items", list);
     }
 
     //2.逻辑删除讲师方法
     @ApiOperation(value = "逻辑删除讲师")
     @DeleteMapping("{id}")//通过路径传值
-    public boolean remove(@ApiParam(name = "id", value = "讲师ID", required = true) @PathVariable String id) {//@PathVariable String id 获取路径中的id
+    public Result removeTeacher(@ApiParam(name = "id", value = "讲师ID", required = true) @PathVariable String id) {//@PathVariable String id 获取路径中的id
         boolean flag = teacherService.removeById(id);
-        return flag;
+        if (flag) {
+            return Result.ok();
+        } else {
+            return Result.error();
+        }
     }
 
 }

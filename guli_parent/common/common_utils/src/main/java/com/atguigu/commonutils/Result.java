@@ -46,7 +46,7 @@ public class Result {
 
     public Result success(Boolean success) {
         this.setSuccess(success);
-        return this;
+        return this; //this是当前类对象
     }
 
     public Result message(String message) {

@@ -139,5 +139,15 @@ public class EduTeacherController {
         }
     }
 
+    //6.根据讲师id查询
+    @ApiOperation(value = "根据讲师id查询")
+    @GetMapping("/getTeacher/{id}")
+    public Result getTeacher(
+            @ApiParam(name = "id", value = "讲师ID", required = true)
+            @PathVariable String id) {
+        EduTeacher byId = teacherService.getById(id);
+        return Result.ok().data("teacher", byId);
+    }
+
 }
 

@@ -1,8 +1,6 @@
 package com.atguigu.eduservice.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -23,13 +21,13 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="EduTeacher对象", description="讲师")
+@ApiModel(value = "EduTeacher对象", description = "讲师")
 public class EduTeacher implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "讲师ID")
-    @TableId(value = "id", type = IdType.ID_WORKER)
+    @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
     @ApiModelProperty(value = "讲师姓名")

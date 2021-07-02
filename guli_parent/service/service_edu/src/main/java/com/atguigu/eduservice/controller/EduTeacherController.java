@@ -149,5 +149,17 @@ public class EduTeacherController {
         return Result.ok().data("teacher", byId);
     }
 
+    //7.根据id修改讲师
+    @ApiOperation(value = "修改讲师")
+    @PostMapping("/updateTeacher")
+    public Result updateTeacher(@RequestBody EduTeacher eduTeacher) {
+        boolean update = teacherService.updateById(eduTeacher);
+        if (update) {
+            return Result.ok();
+        } else {
+            return Result.error();
+        }
+    }
+
 }
 

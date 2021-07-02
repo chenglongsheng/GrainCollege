@@ -76,6 +76,7 @@ public class EduTeacherController {
     }
 
     //4.条件查询带分页的方法
+    @ApiOperation(value = "分页讲师列表")
     @PostMapping("/pageTeacherCondition/{current}/{limit}")
     public Result pageTeacherCondition(
             /*
@@ -85,8 +86,11 @@ public class EduTeacherController {
                 返回数据，返回json数据
             @RequestBody(required = false) 参数值可以为空
              */
+            @ApiParam(name = "current", value = "当前页码", required = true)
             @PathVariable long current,
+            @ApiParam(name = "limit", value = "每页记录数", required = true)
             @PathVariable long limit,
+            @ApiParam(name = "teacherQuery", value = "查询对象", required = false)
             @RequestBody(required = false) TeacherQuery teacherQuery) {
 
         //创建page对象
@@ -122,8 +126,11 @@ public class EduTeacherController {
     }
 
     //5.添加讲师
+    @ApiOperation(value = "添加讲师")
     @PostMapping("/addTeacher")
-    public Result addTeacher(@RequestBody EduTeacher eduTeacher) {
+    public Result addTeacher(
+            @ApiParam(name = "eduTeacher", value = "讲师对象", required = true)
+            @RequestBody EduTeacher eduTeacher) {
         boolean save = teacherService.save(eduTeacher);
         if (save) {
             return Result.ok();

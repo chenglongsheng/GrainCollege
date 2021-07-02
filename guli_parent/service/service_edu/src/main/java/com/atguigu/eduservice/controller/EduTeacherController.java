@@ -63,6 +63,8 @@ public class EduTeacherController {
             @ApiParam(name = "limit", value = "每页记录数", required = true)
             @PathVariable long limit) {
 
+//        int a = 10/0;// 手动制造异常
+
         //创建page对象
         Page<EduTeacher> pageTeacher = new Page<>(current, limit);
 

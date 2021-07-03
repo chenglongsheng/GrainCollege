@@ -30,4 +30,12 @@ public class GlobalExceptionHandler {
         return Result.error().message("启用了ArithmeticException异常处理");
     }
 
+    // 自定义异常处理
+    @ExceptionHandler(GuliException.class)
+    @ResponseBody //返回数据
+    public Result error(GuliException e) {
+        e.printStackTrace();
+        return Result.error().code(e.getCode()).message(e.getMsg());
+    }
+
 }

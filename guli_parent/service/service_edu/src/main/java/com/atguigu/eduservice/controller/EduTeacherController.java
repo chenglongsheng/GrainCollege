@@ -5,6 +5,7 @@ import com.atguigu.commonutils.Result;
 import com.atguigu.eduservice.entity.EduTeacher;
 import com.atguigu.eduservice.entity.vo.TeacherQuery;
 import com.atguigu.eduservice.service.EduTeacherService;
+import com.atguigu.servicebase.exceptionhandler.GuliException;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -63,7 +64,11 @@ public class EduTeacherController {
             @ApiParam(name = "limit", value = "每页记录数", required = true)
             @PathVariable long limit) {
 
-//        int a = 10/0;// 手动制造异常
+        try {
+            int a = 10/0;// 手动制造异常
+        } catch (Exception e) {
+            throw new GuliException(20001, "执行了自定义异常处理");
+        }
 
         //创建page对象
         Page<EduTeacher> pageTeacher = new Page<>(current, limit);

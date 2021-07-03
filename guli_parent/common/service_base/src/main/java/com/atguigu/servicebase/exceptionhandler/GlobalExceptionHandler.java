@@ -36,6 +36,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(GuliException.class)
     @ResponseBody //返回数据
     public Result error(GuliException e) {
+        log.error(e.getMessage());
         e.printStackTrace();
         return Result.error().code(e.getCode()).message(e.getMsg());
     }

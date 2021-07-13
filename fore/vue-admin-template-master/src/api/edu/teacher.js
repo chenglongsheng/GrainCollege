@@ -11,5 +11,12 @@ export default {
             //后端使用ResponseBody 使用json传递数据，把json数据封装到对应对象里面
             data: teacherQuery
         })
+    },
+    // 删除讲师
+    deleteTeacherById(id) {
+        return request({
+            url: `/eduservice/teacher/${id}`,
+            method: 'delete',
+        })
     }
 }

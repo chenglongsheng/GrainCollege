@@ -2,9 +2,7 @@
   <div id="app-container">
     <!-- 表格 -->
     <el-table
-      v-loading="listLoading"
       :data="list"
-      element-loading-text="数据加载中"
       border
       fit
       highlight-current-row>
@@ -41,6 +39,9 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <!-- 分页 -->
+    <el-pagination :total="total" :current-page="page" :page-size="limit" @current-change="getList" layout="total, prev, pager, next, jumper" style="padding: 30px 0; text-align: center"></el-pagination>
   </div>
 </template>
 
@@ -61,7 +62,8 @@ export default {
   },
   methods: {
     //讲师列表
-    getList() {
+    getList(page = 1) {
+      this.page = page
       teacher.getTeacherListPage(this.page, this.limit, this.teacherQuery)
         .then(response => {
           // console.log(response)

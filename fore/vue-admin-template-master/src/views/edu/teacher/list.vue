@@ -111,11 +111,30 @@ export default {
           console.log(error)
         })
     },
-        // 清空方法
+    // 清空方法
     resetData() {
     this.teacherQuery = {}
     this.getList()
-}
+    },
+    // 删除讲师
+    removeDataById(id) {
+      this.$confirm('此操作将永久删除该讲师记录, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {// 确定调用then
+        teacher.deleteTeacherById(id)
+          .then(response => {
+            // 提示信息
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            })
+            // 回到列表页面
+            this.getList()
+          })  
+      })
+    }
   }
 }
 </script>

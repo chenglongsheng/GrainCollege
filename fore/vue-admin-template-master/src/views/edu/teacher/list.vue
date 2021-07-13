@@ -107,9 +107,6 @@ export default {
           console.log(this.list)
           console.log(this.total)
         })
-        .catch(error => {
-          console.log(error)
-        })
     },
     // 清空方法
     resetData() {

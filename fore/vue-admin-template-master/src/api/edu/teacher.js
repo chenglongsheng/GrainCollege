@@ -26,5 +26,12 @@ export default {
             method: 'post',
             data: teacher
         })
+    },
+    // 查询讲师
+    getTeacherInfo(id) {
+        return request({
+            url: `/eduservice/teacher/getTeacher/${id}`,
+            method: 'get'
+        })
     }
 }

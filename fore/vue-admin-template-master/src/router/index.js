@@ -77,6 +77,14 @@ export const constantRouterMap = [
         name: '添加讲师',
         component: () => import('@/views/edu/teacher/save'),
         meta: { title: '添加讲师', icon: 'tree' }
+      },
+      // 通过路由跳转进入数据回显页面
+      {
+        path: 'edit/:id',
+        name: '编辑讲师',
+        component: () => import('@/views/edu/teacher/save'),
+        meta: { title: '编辑讲师', noCache: true },
+        hidden: true
       }
     ]
   },

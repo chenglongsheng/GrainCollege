@@ -60,12 +60,28 @@ export default {
     }
   },
 
+  created() {
+    // 判断路径中有没有id值
+    if (this.$route.params && this.$route.params.id) {
+      // 从路径中获取id
+      const id = this.$route.params.id
+      // 调用查询方法
+      this.getInfo(id)
+    }
+  },
+
   methods: {
 
     saveOrUpdate() {
-      // 添加
-      this.saveBtnDisabled = true
-      this.addTeacher()
+      // 判断修改还是添加
+      if (!this.teacher.id) {
+        // 添加
+        // this.saveBtnDisabled = false
+        this.addTeacher()
+      } else {
+        // 修改
+        this.updateTeacher()
+      }
     },
 
     // 添加的方法
@@ -100,9 +116,9 @@ export default {
             type: 'success',
             message: '修改成功！'
           })
+          // 回到列表页面，路由跳转
+          this.$router.push({ path: '/teacher/list' })
         })
-        // 回到列表页面，路由跳转
-        this.$router.push({path: 'teacher/list'})
     }
   }
 }

@@ -90,6 +90,19 @@ export default {
         .then(response => {
           this.teacher = response.data.teacher
         })
+    },
+    // 修改讲师
+    updateTeacher() {
+      teacherAPI
+        .updateTeacherInfo(this.teacher)
+        .then(response => {
+          this.$message({
+            type: 'success',
+            message: '修改成功！'
+          })
+        })
+        // 回到列表页面，路由跳转
+        this.$router.push({path: 'teacher/list'})
     }
   }
 }

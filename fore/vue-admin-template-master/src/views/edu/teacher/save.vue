@@ -61,16 +61,29 @@ export default {
   },
 
   created() {
-    // 判断路径中有没有id值
-    if (this.$route.params && this.$route.params.id) {
-      // 从路径中获取id
-      const id = this.$route.params.id
-      // 调用查询方法
-      this.getInfo(id)
+    this.extract()
+  },
+
+  // 监听
+  watch: {
+    $route(to, from) {// 路由变化方式
+      this.extract()
     }
   },
 
   methods: {
+
+    extract() {
+      // 判断路径中有没有id值
+      if (this.$route.params && this.$route.params.id) {
+        // 从路径中获取id
+        const id = this.$route.params.id
+        // 调用查询方法
+        this.getInfo(id)
+      } else {
+        this.teacher = {}
+      }
+    },
 
     saveOrUpdate() {
       // 判断修改还是添加

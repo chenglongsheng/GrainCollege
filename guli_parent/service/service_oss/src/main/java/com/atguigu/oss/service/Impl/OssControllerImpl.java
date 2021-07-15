@@ -4,6 +4,7 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.atguigu.oss.service.OssService;
 import com.atguigu.oss.utils.ConstantPropertiesUtils;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +40,18 @@ public class OssControllerImpl implements OssService {
             // 在文件名称里面添加随机唯一值
             String uuid = UUID.randomUUID().toString().replaceAll("-", "");
             fileName = uuid + fileName;
+
+            // 把文件按照日期时间分类
+            // 2021/7/15/filename
+            /*
+             获取当前时间
+             new Date();
+             SimpleDateFormat
+             */
+            // 使用工具
+            String datePath = new DateTime().toString("yyyy/MM/dd");
+            // 拼接
+            fileName = datePath + "/" + fileName;
 
             // 依次填写Bucket名称（例如examplebucket）和Object完整路径（例如exampledir/exampleobject.txt）。Object完整路径中不能包含Bucket名称。
             ossClient.putObject(bucketName, fileName, inputStream);

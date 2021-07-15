@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.UUID;
 
 /**
  * @author chenglongsheng
@@ -34,6 +35,10 @@ public class OssControllerImpl implements OssService {
 
             // 获取文件名称
             String fileName = file.getOriginalFilename();
+
+            // 在文件名称里面添加随机唯一值
+            String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+            fileName = uuid + fileName;
 
             // 依次填写Bucket名称（例如examplebucket）和Object完整路径（例如exampledir/exampleobject.txt）。Object完整路径中不能包含Bucket名称。
             ossClient.putObject(bucketName, fileName, inputStream);

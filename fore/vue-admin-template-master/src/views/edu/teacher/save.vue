@@ -53,7 +53,7 @@
           :width="300"
           :height="300"
           :key="imagecropperKey"
-          :url="BASE_API + '/admin/oss/file/upload'"
+          :url="BASE_API + '/eduoss/fileoss'"
           field="file"
           @close="close"
           @crop-upload-success="cropSuccess"

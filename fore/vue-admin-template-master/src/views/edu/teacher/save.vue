@@ -109,12 +109,13 @@ export default {
 
   methods: {
     // 关闭上传弹框
-    colse() {
-
+    close() {
+      this.imagecropperShow = false
     },
     // 上传成功的方法
-    cropSuccess() {
-
+    cropSuccess(data) {
+      this.imagecropperShow = false
+      this.teacher.avatar = data.url
     },
 
     extract() {

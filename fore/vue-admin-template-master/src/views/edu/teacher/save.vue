@@ -111,10 +111,13 @@ export default {
     // 关闭上传弹框
     close() {
       this.imagecropperShow = false
+      // 上传组件初始化
+      this.imagecropperKey = this.imagecropperKey + 1
     },
     // 上传成功的方法
     cropSuccess(data) {
       this.imagecropperShow = false
+      this.imagecropperKey = this.imagecropperKey + 1
       this.teacher.avatar = data.url
     },
 

@@ -62,15 +62,29 @@ export default {
   methods: {
     // 上传文件到接口里面
     submitUpload() {
-
+      this.importBtnDisabled = true
+      this.loading = true
+      // this.$refs.upload.submit() = document.getElementById("upload").submit()
+      this.$refs.upload.submit()
     },
     // 上传成功
     fileUploadSuccess() {
+      // 提示信息
+      this.loading = false
+      this.$message({
+        type: 'success',
+        message: '添加课程分类成功'
+      })
+      // 跳转课程分类列表
 
     },
     // 上传失败
     fileUploadError() {
-
+      this.loading = false
+      this.$message({
+        type: 'error',
+        message: '添加课程分类失败'
+      })
     }
   }
 }

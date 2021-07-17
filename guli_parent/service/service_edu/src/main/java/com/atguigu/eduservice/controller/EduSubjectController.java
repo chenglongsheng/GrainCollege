@@ -2,13 +2,13 @@ package com.atguigu.eduservice.controller;
 
 
 import com.atguigu.commonutils.Result;
+import com.atguigu.eduservice.entity.subject.OneSubject;
 import com.atguigu.eduservice.service.EduSubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * <p>
@@ -34,5 +34,14 @@ public class EduSubjectController {
         return Result.ok();
     }
 
+    // 课程分类列表(树形)
+    @GetMapping("/getAllSubject")
+    public Result getAllSubject() {
+
+        // 泛型一级分类包括二级分类
+        List<OneSubject> list = subjectService.getAllOneAndTwoSubject();
+
+        return Result.ok().data("list", list);
+    }
 }
 

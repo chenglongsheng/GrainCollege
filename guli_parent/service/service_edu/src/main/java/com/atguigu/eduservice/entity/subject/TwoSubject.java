@@ -2,7 +2,9 @@ package com.atguigu.eduservice.entity.subject;
 
 import lombok.Data;
 
-/**二级分类
+/**
+ * 二级分类
+ *
  * @author chenglongsheng
  * @create 2021-07-17 22:19
  */

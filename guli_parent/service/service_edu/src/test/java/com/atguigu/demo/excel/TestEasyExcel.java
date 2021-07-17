@@ -12,8 +12,14 @@ import java.util.List;
 public class TestEasyExcel {
 
     public static void main(String[] args) {
+//        String fileName = "F:\\guli_edu\\write.xlsx";
+//        EasyExcel.write(fileName, DemoData.class).sheet("学生列表").doWrite(getData());
+
+
+        //读操作
         String fileName = "F:\\guli_edu\\write.xlsx";
-        EasyExcel.write(fileName, DemoData.class).sheet("学生列表").doWrite(getData());
+        EasyExcel.read(fileName, DemoData.class, new ExcelListener()).sheet().doRead();
+
     }
 
     private static List<DemoData> getData() {

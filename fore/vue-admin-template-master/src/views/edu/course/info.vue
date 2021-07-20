@@ -18,3 +18,25 @@
     </el-form>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      saveBtnDisabled: false // 保存按钮是否禁用
+    }
+  },
+
+  created() {
+    console.log('info created')
+  },
+
+  methods: {
+
+    next() {
+			// 跳转到下一步
+      this.$router.push({ path: '/course/chapter/1' })
+    }
+  }
+}
+</script>

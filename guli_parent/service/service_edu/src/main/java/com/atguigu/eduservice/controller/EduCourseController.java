@@ -27,8 +27,9 @@ public class EduCourseController {
     @PostMapping("/addCourseInfo")
     public Result addCourseInfo(@RequestBody CourseInfoVo courseInfoVo) {
 
-        courseService.saveCourseInfo(courseInfoVo);
-        return Result.ok();
+        String id = courseService.saveCourseInfo(courseInfoVo);
+        // 返回id为后续课程章节使用
+        return Result.ok().data("courseId", id);
 
     }
 

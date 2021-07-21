@@ -95,7 +95,7 @@ export default {
           type: 'success',
           message: '课程信息添加成功！',
         })
-        this.$router.push({ path: '/course/chapter/1' })
+        this.$router.push({ path: '/course/chapter/' + response.data.courseId })
       })
     },
   },

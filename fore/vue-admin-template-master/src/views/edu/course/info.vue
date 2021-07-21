@@ -24,6 +24,17 @@
       <!-- 所属分类 TODO -->
 
       <!-- 课程讲师 TODO -->
+      <!-- 课程讲师 -->
+      <el-form-item label="课程讲师">
+        <el-select v-model="courseInfo.teacherId" placeholder="请选择">
+          <el-option
+            v-for="teacher in teacherList"
+            :key="teacher.id"
+            :label="teacher.name"
+            :value="teacher.id"
+          />
+        </el-select>
+      </el-form-item>
 
       <el-form-item label="总课时">
         <el-input-number
@@ -81,11 +92,13 @@ export default {
         cover: '',
         price: 0,
       },
+      teacherList: [],
     }
   },
 
   created() {
-    console.log('info created')
+    // console.log('info created')
+    this.getAllTeacherList()
   },
 
   methods: {
@@ -96,6 +109,11 @@ export default {
           message: '课程信息添加成功！',
         })
         this.$router.push({ path: '/course/chapter/' + response.data.courseId })
+      })
+    },
+    getAllTeacherList() {
+      course.getAllTeacher().then((response) => {
+        this.teacherList = response.data.items
       })
     },
   },

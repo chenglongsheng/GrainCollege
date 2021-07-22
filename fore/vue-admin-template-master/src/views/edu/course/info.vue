@@ -22,6 +22,16 @@
       </el-form-item>
 
       <!-- 所属分类 TODO -->
+      <el-form-item label="课程分类">
+        <el-select v-model="courseInfo.subjectId" placeholder="请选择">
+          <el-option
+            v-for="course in oneSubjectList"
+            :key="course.id"
+            :label="course.title"
+            :value="course.id"
+          />
+        </el-select>
+      </el-form-item>
 
       <!-- 课程讲师 TODO -->
       <!-- 课程讲师 -->
@@ -79,26 +89,32 @@
 
 <script>
 import course from '@/api/edu/course'
+import subject from '@/api/edu/subject'
 export default {
   data() {
     return {
       saveBtnDisabled: false, // 保存按钮是否禁用
       courseInfo: {
         title: '',
-        subjectId: '',
+        subjectId: '', // 二级分类id
+        subjectParentId: '', // 一级分类id
         teacherId: '',
         lessonNum: 0,
         description: '',
         cover: '',
         price: 0,
       },
-      teacherList: [],
+      teacherList: [], // 封装所有讲师
+      oneSubjectList: [], //一级分类
+      twoSubjectList: [], //二级分类
     }
   },
 
   created() {
     // console.log('info created')
     this.getAllTeacherList()
+    this.getFirstLevelSubject()
+    this.getSecondLevelSubject()
   },
 
   methods: {
@@ -114,6 +130,16 @@ export default {
     getAllTeacherList() {
       course.getAllTeacher().then((response) => {
         this.teacherList = response.data.items
+      })
+    },
+    getFirstLevelSubject() {
+      subject.getSubjectList().then((response) => {
+        this.oneSubjectList = response.data.list
+      })
+    },
+    getSecondLevelSubject() {
+      subject.getSubjectList().then((response) => {
+        this.twoSubjectList = response.data.list
       })
     },
   },

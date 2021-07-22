@@ -23,9 +23,22 @@
 
       <!-- 所属分类 TODO -->
       <el-form-item label="课程分类">
-        <el-select v-model="courseInfo.subjectId" placeholder="请选择">
+        <el-select
+          v-model="courseInfo.subjectParentId"
+          placeholder="一级分类"
+          @change="firstLevelSubjectChanged"
+        >
           <el-option
             v-for="course in oneSubjectList"
+            :key="course.id"
+            :label="course.title"
+            :value="course.id"
+          />
+        </el-select>
+        <!-- 二级分类 -->
+        <el-select v-model="courseInfo.subjectId" placeholder="二级分类">
+          <el-option
+            v-for="course in twoSubjectList"
             :key="course.id"
             :label="course.title"
             :value="course.id"
@@ -114,7 +127,6 @@ export default {
     // console.log('info created')
     this.getAllTeacherList()
     this.getFirstLevelSubject()
-    this.getSecondLevelSubject()
   },
 
   methods: {
@@ -137,10 +149,17 @@ export default {
         this.oneSubjectList = response.data.list
       })
     },
-    getSecondLevelSubject() {
-      subject.getSubjectList().then((response) => {
-        this.twoSubjectList = response.data.list
-      })
+    firstLevelSubjectChanged(value) {
+      // alert(value)
+      // 清空二级分类下拉中上一次选择的值
+      this.courseInfo.subjectId = ''
+      // 遍历一级分类（一级分类中包括二级分类，就是children）
+      for (var i = 0; i < this.oneSubjectList.length; i++) {
+        // 判断一级分类id，把children赋值给twoSubjectList
+        if (value === this.oneSubjectList[i].id) {
+          this.twoSubjectList = this.oneSubjectList[i].children
+        }
+      }
     },
   },
 }

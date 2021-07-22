@@ -77,6 +77,18 @@
       </el-form-item>
 
       <!-- 课程封面 TODO -->
+      <!-- 课程封面 -->
+      <el-form-item label="课程封面">
+        <el-upload
+          :show-file-list="false"
+          :on-success="handleAvatarUpload"
+          :before-upload="beforeAvatarUpload"
+          :action="BASE_API + '/eduoss/fileoss'"
+          class="avatar-uploader"
+        >
+          <img :src="courseInfo.cover" />
+        </el-upload>
+      </el-form-item>
 
       <el-form-item label="课程价格">
         <el-input-number
@@ -114,12 +126,13 @@ export default {
         teacherId: '',
         lessonNum: 0,
         description: '',
-        cover: '',
+        cover: '/static/3.jpg',
         price: 0,
       },
       teacherList: [], // 封装所有讲师
       oneSubjectList: [], //一级分类
       twoSubjectList: [], //二级分类
+      BASE_API: process.env.BASE_API, //接口API地址
     }
   },
 
@@ -160,6 +173,23 @@ export default {
           this.twoSubjectList = this.oneSubjectList[i].children
         }
       }
+    },
+    // 封面上传成功
+    handleAvatarUpload(res, file) {
+      this.courseInfo.cover = res.data.url
+    },
+    // 封面上传之前 做规定
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg'
+      const isLimit2M = file.size / 1024 / 1024 < 2
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式！')
+      }
+      if (!isLimit2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB！')
+      }
+      return isJPG && isLimit2M
     },
   },
 }

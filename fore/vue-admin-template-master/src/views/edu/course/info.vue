@@ -115,9 +115,11 @@
 <script>
 import course from '@/api/edu/course'
 import subject from '@/api/edu/subject'
+import Tinymce from '@/components/Tinymce'
 export default {
   data() {
     return {
+      components: { Tinymce },
       saveBtnDisabled: false, // 保存按钮是否禁用
       courseInfo: {
         title: '',

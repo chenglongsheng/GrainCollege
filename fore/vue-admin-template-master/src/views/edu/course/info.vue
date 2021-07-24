@@ -69,11 +69,9 @@
       </el-form-item>
 
       <!-- 课程简介 TODO -->
+      <!-- 课程简介-->
       <el-form-item label="课程简介">
-        <el-input
-          v-model="courseInfo.description"
-          placeholder=" 示例：机器学习项目课：从基础到搭建项目视频课程。专业名称注意大小写"
-        />
+        <tinymce :height="300" v-model="courseInfo.description" />
       </el-form-item>
 
       <!-- 课程封面 TODO -->
@@ -196,3 +194,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.tinymce-container {
+  line-height: 29px;
+}
+</style>

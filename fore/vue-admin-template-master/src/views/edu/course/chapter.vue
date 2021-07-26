@@ -1,36 +1,50 @@
 <template>
-
   <div class="app-container">
+    <h2 style="text-align: center">发布新课程</h2>
 
-    <h2 style="text-align: center;">发布新课程</h2>
-
-    <el-steps :active="2" process-status="wait" align-center style="margin-bottom: 40px;">
-      <el-step title="填写课程基本信息"/>
-      <el-step title="创建课程大纲"/>
-      <el-step title="提交审核"/>
+    <el-steps
+      :active="2"
+      process-status="wait"
+      align-center
+      style="margin-bottom: 40px"
+    >
+      <el-step title="填写课程基本信息" />
+      <el-step title="创建课程大纲" />
+      <el-step title="提交审核" />
     </el-steps>
 
     <el-form label-width="120px">
-
       <el-form-item>
         <el-button @click="previous">上一步</el-button>
-        <el-button :disabled="saveBtnDisabled" type="primary" @click="next">下一步</el-button>
+        <el-button :disabled="saveBtnDisabled" type="primary" @click="next"
+          >下一步</el-button
+        >
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
-
+import chapter from '@/api/edu/chapter'
 export default {
   data() {
     return {
-      saveBtnDisabled: false // 保存按钮是否禁用
+      saveBtnDisabled: false, // 保存按钮是否禁用
+      allChapterVideo: [],
+      courseId: '', // 课程id
     }
   },
 
   created() {
-    console.log('chapter created')
+    // console.log('chapter created')
+    // 获取路由的id
+    if (this.$route.params && this.$route.params.id) {
+      this.courseId = this.$route.params.id
+      //根据课程id查询所有章节和小节
+      this.getChapterAndVideo()
+    }
+    //根据课程id查询所有章节和小节
+    this.getChapterAndVideo()
   },
 
   methods: {
@@ -40,7 +54,13 @@ export default {
 
     next() {
       this.$router.push({ path: '/course/publish/1' })
-    }
-  }
+    },
+    //根据课程id查询所有章节和小节
+    getChapterAndVideo() {
+      chapter.getAllChapterVideo(this.courseId).then((response) => {
+        this.allChapterVideo = response.data.allChapterVideo
+      })
+    },
+  },
 }
 </script>

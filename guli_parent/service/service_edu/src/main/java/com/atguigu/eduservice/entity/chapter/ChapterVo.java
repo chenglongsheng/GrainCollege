@@ -10,7 +10,7 @@ import java.util.List;
  * @create 2021-07-26 22:20
  */
 @Data
-public class chapterVo {
+public class ChapterVo {
 
     private String id;
     private String title;

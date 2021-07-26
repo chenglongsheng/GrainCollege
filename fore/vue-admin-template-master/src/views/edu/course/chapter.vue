@@ -13,6 +13,17 @@
       <el-step title="提交审核" />
     </el-steps>
 
+    <ul>
+      <li v-for="chapter in allChapterVideo" :key="chapter.id">
+        {{ chapter.title }}
+        <ul>
+          <li v-for="video in chapter.children" :key="video.id">
+            {{ video.title }}
+          </li>
+        </ul>
+      </li>
+    </ul>
+
     <el-form label-width="120px">
       <el-form-item>
         <el-button @click="previous">上一步</el-button>

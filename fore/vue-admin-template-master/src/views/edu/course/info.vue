@@ -137,6 +137,21 @@ export default {
     }
   },
 
+  watch: {
+    $route(from, to) {
+      if (this.$route.params && this.$route.params.id) {
+        this.courseId = this.$route.params.id
+        // 调用 根据课程id查询
+        this.getInfo()
+      } else {
+        // 初始化所有讲师
+        this.getAllTeacherList()
+        this.getFirstLevelSubject()
+        this.courseInfo = {}
+      }
+    },
+  },
+
   created() {
     //获取路由中id、
     if (this.$route.params && this.$route.params.id) {
@@ -147,6 +162,7 @@ export default {
       // 初始化所有讲师
       this.getAllTeacherList()
       this.getFirstLevelSubject()
+      this.courseInfo = {}
     }
   },
 

@@ -129,6 +129,7 @@ export default {
         cover: '/static/3.jpg',
         price: 0,
       },
+      courseId: '',
       teacherList: [], // 封装所有讲师
       oneSubjectList: [], //一级分类
       twoSubjectList: [], //二级分类
@@ -137,12 +138,24 @@ export default {
   },
 
   created() {
+    //获取路由中id、
+    if (this.$route.params && this.$route.params.id) {
+      this.courseId = this.$route.params.id
+      // 调用 根据课程id查询
+      this.getInfo()
+    }
     // console.log('info created')
     this.getAllTeacherList()
     this.getFirstLevelSubject()
   },
 
   methods: {
+    // 根据课程id查询
+    getInfo() {
+      course.getCourseInfo(this.courseId).then((response) => {
+        this.courseInfo = response.data.courseInfoVo
+      })
+    },
     saveOrUpdate() {
       course.addCourseInfo(this.courseInfo).then((response) => {
         this.$message({

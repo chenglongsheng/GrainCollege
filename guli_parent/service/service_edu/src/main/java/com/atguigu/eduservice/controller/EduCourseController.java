@@ -40,5 +40,12 @@ public class EduCourseController {
         return Result.ok().data("courseInfoVo", courseInfoVo);
     }
 
+    // 修改课程信息
+    @PostMapping("/updateCourseInfo")
+    public Result updateCourseInfo(@RequestBody CourseInfoVo courseInfoVo) {
+        courseService.updateCourseInfo(courseInfoVo);
+        return Result.ok();
+    }
+
 }
 

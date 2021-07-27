@@ -64,11 +64,11 @@ export default {
 
   methods: {
     previous() {
-      this.$router.push({ path: '/course/info/1' })
+      this.$router.push({ path: '/course/info/' + this.courseId })
     },
 
     next() {
-      this.$router.push({ path: '/course/publish/1' })
+      this.$router.push({ path: '/course/publish/' + this.courseId })
     },
     //根据课程id查询所有章节和小节
     getChapterAndVideo() {

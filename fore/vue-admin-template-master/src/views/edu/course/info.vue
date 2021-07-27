@@ -143,10 +143,11 @@ export default {
       this.courseId = this.$route.params.id
       // 调用 根据课程id查询
       this.getInfo()
+    } else {
+      // 初始化所有讲师
+      this.getAllTeacherList()
+      this.getFirstLevelSubject()
     }
-    // console.log('info created')
-    this.getAllTeacherList()
-    this.getFirstLevelSubject()
   },
 
   methods: {
@@ -154,6 +155,20 @@ export default {
     getInfo() {
       course.getCourseInfo(this.courseId).then((response) => {
         this.courseInfo = response.data.courseInfoVo
+        // 查询所有分类
+        subject.getSubjectList().then((response) => {
+          // 获取所有一级分类
+          this.oneSubjectList = response.data.list
+          // 遍历所有一级分类
+          for (let i = 0; i < this.oneSubjectList.length; i++) {
+            var oneSubject = this.oneSubjectList[i]
+            if (this.courseInfo.subjectParentId == oneSubject.id) {
+              this.twoSubjectList = oneSubject.children
+            }
+          }
+        })
+        // 初始化所有讲师
+        this.getAllTeacherList()
       })
     },
     saveOrUpdate() {

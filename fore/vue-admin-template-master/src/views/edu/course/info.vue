@@ -147,7 +147,16 @@ export default {
         // 初始化所有讲师
         this.getAllTeacherList()
         this.getFirstLevelSubject()
-        this.courseInfo = {}
+        this.courseInfo = {
+          title: '',
+          subjectId: '', // 二级分类id
+          subjectParentId: '', // 一级分类id
+          teacherId: '',
+          lessonNum: 0,
+          description: '',
+          cover: '/static/3.jpg',
+          price: 0,
+        }
       }
     },
   },
@@ -162,7 +171,16 @@ export default {
       // 初始化所有讲师
       this.getAllTeacherList()
       this.getFirstLevelSubject()
-      this.courseInfo = {}
+      this.courseInfo = {
+        title: '',
+        subjectId: '', // 二级分类id
+        subjectParentId: '', // 一级分类id
+        teacherId: '',
+        lessonNum: 0,
+        description: '',
+        cover: '/static/3.jpg',
+        price: 0,
+      }
     }
   },
 

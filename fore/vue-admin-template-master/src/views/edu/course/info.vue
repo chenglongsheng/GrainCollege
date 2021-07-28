@@ -205,7 +205,7 @@ export default {
         this.getAllTeacherList()
       })
     },
-    saveOrUpdate() {
+    addCourse() {
       course.addCourseInfo(this.courseInfo).then((response) => {
         this.$message({
           type: 'success',
@@ -213,6 +213,22 @@ export default {
         })
         this.$router.push({ path: '/course/chapter/' + response.data.courseId })
       })
+    },
+    updateCourse() {
+      course.updateCourseInfo(this.courseInfo).then((response) => {
+        this.$message({
+          type: 'success',
+          message: '课程信息修改成功！',
+        })
+        this.$router.push({ path: '/course/chapter/' + this.courseId })
+      })
+    },
+    saveOrUpdate() {
+      if (!this.courseInfo.id) {
+        this.addCourse()
+      } else {
+        this.updateCourse()
+      }
     },
     getAllTeacherList() {
       course.getAllTeacher().then((response) => {

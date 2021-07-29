@@ -40,7 +40,9 @@
               {{ video.title }}
               <span class="acts">
                 <el-button type="text">编辑</el-button>
-                <el-button type="text">删除</el-button>
+                <el-button type="text" @click="removeVideo(video.id)"
+                  >删除</el-button
+                >
               </span>
             </p>
           </li>
@@ -154,6 +156,25 @@ export default {
       // 设置章节id
       this.video.chapterId = chapterId
       ;(this.video.title = ''), (this.video.sort = 0), (this.video.free = 0)
+    },
+    // 删除小节
+    removeVideo(id) {
+      this.$confirm('此操作将永久删除该小节记录, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }).then(() => {
+        // 确定调用then
+        video.deleteVideo(id).then((response) => {
+          // 提示信息
+          this.$message({
+            type: 'success',
+            message: '删除成功!',
+          })
+          // 刷新页面
+          this.getChapterAndVideo()
+        })
+      })
     },
     // 添加小节
     addVideo() {

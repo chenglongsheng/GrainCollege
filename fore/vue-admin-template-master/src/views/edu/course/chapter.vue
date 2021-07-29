@@ -112,10 +112,12 @@
 
 <script>
 import chapter from '@/api/edu/chapter'
+import video from '@/api/edu/video'
 export default {
   data() {
     return {
       saveBtnDisabled: false, // 保存按钮是否禁用
+      saveVideoBtnDisabled: false,
       allChapterVideo: [],
       courseId: '', // 课程id
       dialogChapterFormVisible: false, // 章节弹框
@@ -149,6 +151,29 @@ export default {
     // 添加小节弹框
     openVideo(chapterId) {
       this.dialogVideoFormVisible = true
+      // 设置章节id
+      this.video.chapterId = chapterId
+      ;(this.video.title = ''), (this.video.sort = 0), (this.video.free = 0)
+    },
+    // 添加小节
+    addVideo() {
+      // 设置课程id
+      this.video.courseId = this.courseId
+      video.addVideo(this.video).then((response) => {
+        // 关闭弹框
+        this.dialogVideoFormVisible = false
+        // 提示信息
+        this.$message({
+          type: 'success',
+          message: '添加小节成功！',
+        })
+        // 刷新页面
+        this.getChapterAndVideo()
+      })
+    },
+
+    saveOrUpdateVideo() {
+      this.addVideo()
     },
 
     // --------------------------章节操作---------------------

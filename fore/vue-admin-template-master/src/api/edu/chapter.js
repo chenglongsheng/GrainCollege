@@ -14,5 +14,12 @@ export default {
             method: 'post',
             data: chapter
         })
+    },
+    // 查询章节
+    getChapter(chapterId) {
+        return request({
+            url: '/eduservice/chapter/addChapter/' + chapterId,
+            method: 'get'
+        })
     }
 }

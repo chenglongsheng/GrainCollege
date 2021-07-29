@@ -6,5 +6,13 @@ export default {
             url: `/eduservice/chapter/getChapterVideo/${courseId}`,
             method: 'get'
         })
+    },
+    // 添加章节
+    addChapter(chapter) {
+        return request({
+            url: `/eduservice/chapter/addChapter`,
+            method: 'post',
+            data: chapter
+        })
     }
 }

@@ -13,13 +13,11 @@
       <el-step title="提交审核" />
     </el-steps>
 
-    <el-button type="text" @click="dialogChapterFormVisible = true"
-      >添加章节</el-button
-    >
+    <el-button type="text" @click="openChapterDialog">添加章节</el-button>
 
     <!-- 章节 -->
-    <ul class="chanpterList">
-      <li v-for="chapter in chapterNestedList" :key="chapter.id">
+    <ul class="chapterList">
+      <li v-for="chapter in allChapterVideo" :key="chapter.id">
         <p>
           {{ chapter.title }}
           <span class="acts">
@@ -30,7 +28,7 @@
         </p>
 
         <!-- 视频 -->
-        <ul class="chanpterList videoList">
+        <ul class="chapterList videoList">
           <li v-for="video in chapter.children" :key="video.id">
             <p>
               {{ video.title }}
@@ -81,12 +79,14 @@ export default {
       allChapterVideo: [],
       courseId: '', // 课程id
       dialogChapterFormVisible: false, // 章节弹框
-      chapter: {},
+      chapter: {
+        title: '',
+        sort: 0,
+      },
     }
   },
 
   created() {
-    // console.log('chapter created')
     // 获取路由的id
     if (this.$route.params && this.$route.params.id) {
       this.courseId = this.$route.params.id
@@ -98,12 +98,31 @@ export default {
   },
 
   methods: {
-    previous() {
-      this.$router.push({ path: '/course/info/' + this.courseId })
+    // 加添章节弹框
+    openChapterDialog() {
+      this.dialogChapterFormVisible = true
+      this.chapter.title = ''
+      this.chapter.sort = 0
     },
-
-    next() {
-      this.$router.push({ path: '/course/publish/' + this.courseId })
+    //
+    addChapter() {},
+    //
+    updateChapter() {},
+    // 添加章节
+    saveOrUpdate() {
+      // 设置chapterId
+      this.chapter.courseId = this.courseId
+      chapter.addChapter(this.chapter).then((response) => {
+        // 关闭弹框
+        this.dialogChapterFormVisible = false
+        // 提示信息
+        this.$message({
+          type: 'success',
+          message: '添加章节成功！',
+        })
+        // 刷新页面
+        this.getChapterAndVideo()
+      })
     },
     //根据课程id查询所有章节和小节
     getChapterAndVideo() {
@@ -111,21 +130,27 @@ export default {
         this.allChapterVideo = response.data.allChapterVideo
       })
     },
+    previous() {
+      this.$router.push({ path: '/course/info/' + this.courseId })
+    },
+    next() {
+      this.$router.push({ path: '/course/publish/' + this.courseId })
+    },
   },
 }
 </script>
 
 <style scoped>
-.chanpterList {
+.chapterList {
   position: relative;
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.chanpterList li {
+.chapterList li {
   position: relative;
 }
-.chanpterList p {
+.chapterList p {
   float: left;
   font-size: 20px;
   margin: 10px 0;
@@ -135,7 +160,7 @@ export default {
   width: 100%;
   border: 1px solid #ddd;
 }
-.chanpterList .acts {
+.chapterList .acts {
   float: right;
   font-size: 14px;
 }

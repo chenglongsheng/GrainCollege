@@ -25,7 +25,9 @@
             <el-button style="" type="text" @click="openEditChapter(chapter.id)"
               >编辑</el-button
             >
-            <el-button type="text">删除</el-button>
+            <el-button type="text" @click="removeChapter(chapter.id)"
+              >删除</el-button
+            >
           </span>
         </p>
 
@@ -100,6 +102,25 @@ export default {
   },
 
   methods: {
+    // 删除章节
+    removeChapter(courseId) {
+      this.$confirm('此操作将永久删除该章节记录, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }).then(() => {
+        // 确定调用then
+        chapter.deleteChapter(courseId).then((response) => {
+          // 提示信息
+          this.$message({
+            type: 'success',
+            message: '删除成功!',
+          })
+          // 刷新页面
+          this.getChapterAndVideo()
+        })
+      })
+    },
     // 点击编辑发出弹框并数据回显
     openEditChapter(chapterId) {
       this.dialogChapterFormVisible = true

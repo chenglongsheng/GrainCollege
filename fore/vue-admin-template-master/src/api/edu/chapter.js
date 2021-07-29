@@ -21,5 +21,13 @@ export default {
             url: '/eduservice/chapter/addChapter/' + chapterId,
             method: 'get'
         })
-    }
+    },
+    // 修改章节
+    updateChapter(chapter) {
+        return request({
+            url: `/eduservice/chapter/updateChapter`,
+            method: 'post',
+            data: chapter
+        })
+    },
 }

@@ -22,7 +22,9 @@
           {{ chapter.title }}
           <span class="acts">
             <el-button type="text">添加课时</el-button>
-            <el-button style="" type="text">编辑</el-button>
+            <el-button style="" type="text" @click="openEditChapter(chapter.id)"
+              >编辑</el-button
+            >
             <el-button type="text">删除</el-button>
           </span>
         </p>
@@ -98,18 +100,21 @@ export default {
   },
 
   methods: {
+    // 点击编辑发出弹框并数据回显
+    openEditChapter(chapterId) {
+      this.dialogChapterFormVisible = true
+      chapter.getChapter(chapterId).then((response) => {
+        this.chapter = response.data.chapter
+      })
+    },
     // 加添章节弹框
     openChapterDialog() {
       this.dialogChapterFormVisible = true
       this.chapter.title = ''
       this.chapter.sort = 0
     },
-    //
-    addChapter() {},
-    //
-    updateChapter() {},
     // 添加章节
-    saveOrUpdate() {
+    addChapter() {
       // 设置chapterId
       this.chapter.courseId = this.courseId
       chapter.addChapter(this.chapter).then((response) => {
@@ -123,6 +128,28 @@ export default {
         // 刷新页面
         this.getChapterAndVideo()
       })
+    },
+    // 修改章节
+    updateChapter() {
+      chapter.updateChapter(this.chapter).then((response) => {
+        // 关闭弹框
+        this.dialogChapterFormVisible = false
+        // 提示信息
+        this.$message({
+          type: 'success',
+          message: '修改章节成功！',
+        })
+        // 刷新页面
+        this.getChapterAndVideo()
+      })
+    },
+
+    saveOrUpdate() {
+      if (!this.chapter.id) {
+        this.addChapter()
+      } else {
+        this.updateChapter()
+      }
     },
     //根据课程id查询所有章节和小节
     getChapterAndVideo() {

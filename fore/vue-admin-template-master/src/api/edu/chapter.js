@@ -30,4 +30,11 @@ export default {
             data: chapter
         })
     },
+    //  删除章节
+    deleteChapter(chapterId) {
+        return request({
+            url: '/eduservice/chapter/' + chapterId,
+            method: 'delete'
+        })
+    }
 }

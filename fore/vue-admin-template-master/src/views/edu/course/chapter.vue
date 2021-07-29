@@ -21,7 +21,9 @@
         <p>
           {{ chapter.title }}
           <span class="acts">
-            <el-button type="text">添加课时</el-button>
+            <el-button type="text" @click="openVideo(chapter.id)"
+              >添加课时</el-button
+            >
             <el-button style="" type="text" @click="openEditChapter(chapter.id)"
               >编辑</el-button
             >
@@ -71,6 +73,40 @@
         <el-button type="primary" @click="saveOrUpdate">确 定</el-button>
       </div>
     </el-dialog>
+
+    <!-- 添加和修改课时表单 -->
+    <el-dialog :visible.sync="dialogVideoFormVisible" title="添加课时">
+      <el-form :model="video" label-width="120px">
+        <el-form-item label="课时标题">
+          <el-input v-model="video.title" />
+        </el-form-item>
+        <el-form-item label="课时排序">
+          <el-input-number
+            v-model="video.sort"
+            :min="0"
+            controls-position="right"
+          />
+        </el-form-item>
+        <el-form-item label="是否免费">
+          <el-radio-group v-model="video.free">
+            <el-radio :label="true">免费</el-radio>
+            <el-radio :label="false">默认</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="上传视频">
+          <!-- TODO -->
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogVideoFormVisible = false">取 消</el-button>
+        <el-button
+          :disabled="saveVideoBtnDisabled"
+          type="primary"
+          @click="saveOrUpdateVideo"
+          >确 定</el-button
+        >
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -83,9 +119,16 @@ export default {
       allChapterVideo: [],
       courseId: '', // 课程id
       dialogChapterFormVisible: false, // 章节弹框
+      dialogVideoFormVisible: false,
       chapter: {
         title: '',
         sort: 0,
+      },
+      video: {
+        title: '',
+        sort: 0,
+        free: 0,
+        videoSourseId: '',
       },
     }
   },
@@ -102,6 +145,13 @@ export default {
   },
 
   methods: {
+    // --------------------------小节操作---------------------
+    // 添加小节弹框
+    openVideo(chapterId) {
+      this.dialogVideoFormVisible = true
+    },
+
+    // --------------------------章节操作---------------------
     // 删除章节
     removeChapter(courseId) {
       this.$confirm('此操作将永久删除该章节记录, 是否继续?', '提示', {

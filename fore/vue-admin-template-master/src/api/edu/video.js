@@ -22,5 +22,12 @@ export default {
             url: '/eduservice/video/' + id,
             method: 'delete'
         })
+    },
+    // 查询小节
+    getVideo(id) {
+        return request({
+            url: '/eduservice/video/getVideo/' + id,
+            method: 'get'
+        })
     }
 }

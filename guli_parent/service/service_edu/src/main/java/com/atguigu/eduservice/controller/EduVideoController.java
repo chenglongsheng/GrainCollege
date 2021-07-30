@@ -44,5 +44,12 @@ public class EduVideoController {
         return Result.ok();
     }
 
+    // 查询小节
+    @GetMapping("/getVideo/{id}")
+    public Result getVideo(@PathVariable String id) {
+        EduVideo video = videoService.getById(id);
+        return Result.ok().data("video", video);
+    }
+
 }
 

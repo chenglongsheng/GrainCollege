@@ -25,18 +25,32 @@
 </template>
 
 <script>
+import course from '@/api/edu/course'
 export default {
   data() {
     return {
       saveBtnDisabled: false, // 保存按钮是否禁用
+      publishCourse: {},
     }
   },
 
   created() {
-    console.log('publish created')
+    // 1 获取路由课程id值
+    if (this.$route.params && this.$route.params.id) {
+      this.courseId = this.$route.params.id
+      // 2 调用接口方法根据课程id查询
+      this.getCoursePublishId()
+    }
+    
   },
 
   methods: {
+    // 根据课程id查询
+    getCoursePublishId() {
+      course.getCoursePublishInfo(this.courseId).then((response) => {
+        this.publishCourse = response.data.publishCourse
+      })
+    },
     previous() {
       this.$router.push({ path: '/course/chapter/1' })
     },

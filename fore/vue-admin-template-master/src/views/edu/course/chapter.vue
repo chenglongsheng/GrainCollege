@@ -39,7 +39,9 @@
             <p>
               {{ video.title }}
               <span class="acts">
-                <el-button type="text">编辑</el-button>
+                <el-button type="text" @click="openEditVideo(video.id)"
+                  >编辑</el-button
+                >
                 <el-button type="text" @click="removeVideo(video.id)"
                   >删除</el-button
                 >
@@ -155,7 +157,18 @@ export default {
       this.dialogVideoFormVisible = true
       // 设置章节id
       this.video.chapterId = chapterId
-      ;(this.video.title = ''), (this.video.sort = 0), (this.video.free = 0)
+      this.video.title = ''
+      this.video.sort = 0
+      this.video.free = 0
+      this.video.videoSourseId = ''
+    },
+    //
+    // 点击编辑发出弹框并数据回显
+    openEditVideo(id) {
+      this.dialogVideoFormVisible = true
+      video.getVideo(id).then((response) => {
+        this.video = response.data.video
+      })
     },
     // 删除小节
     removeVideo(id) {
@@ -192,9 +205,26 @@ export default {
         this.getChapterAndVideo()
       })
     },
+    // 修改小节
+    updateVideo() {
+      video.updateVideo(this.video).then((response) => {
+        // 关闭弹框
+        this.dialogVideoFormVisible = false
+        // 提示信息
+        this.$message({
+          type: 'success',
+          message: '修改小节成功！',
+        })
+        // 刷新页面
+        this.getChapterAndVideo()
+      })
+    },
 
     saveOrUpdateVideo() {
-      this.addVideo()
+      console.log(this.video)
+      if (this.video.id) {
+        this.addVideo()
+      }
     },
 
     // --------------------------章节操作---------------------
@@ -226,6 +256,7 @@ export default {
     },
     // 加添章节弹框
     openChapterDialog() {
+      console.log(this.chapter.id)
       this.dialogChapterFormVisible = true
       this.chapter.title = ''
       this.chapter.sort = 0

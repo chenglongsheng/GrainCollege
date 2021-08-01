@@ -10,17 +10,33 @@
     >
       <el-step title="填写课程基本信息" />
       <el-step title="创建课程大纲" />
-      <el-step title="提交审核" />
+      <el-step title="发布课程" />
     </el-steps>
 
-    <el-form label-width="120px">
-      <el-form-item>
-        <el-button @click="previous">返回修改</el-button>
-        <el-button :disabled="saveBtnDisabled" type="primary" @click="publish"
-          >发布课程</el-button
-        >
-      </el-form-item>
-    </el-form>
+    <div class="ccInfo">
+      <img :src="coursePublish.cover" />
+      <div class="main">
+        <h2>{{ coursePublish.title }}</h2>
+        <p class="gray">
+          <span>共{{ coursePublish.lessonNum }}课时</span>
+        </p>
+        <p>
+          <span
+            >所属分类：{{ coursePublish.subjectLevelOne }} —
+            {{ coursePublish.subjectLevelTwo }}</span
+          >
+        </p>
+        <p>课程讲师：{{ coursePublish.teacherName }}</p>
+        <h3 class="red">￥{{ coursePublish.price }}</h3>
+      </div>
+    </div>
+
+    <div>
+      <el-button @click="previous">返回修改</el-button>
+      <el-button :disabled="saveBtnDisabled" type="primary" @click="publish"
+        >发布课程</el-button
+      >
+    </div>
   </div>
 </template>
 
@@ -30,7 +46,8 @@ export default {
   data() {
     return {
       saveBtnDisabled: false, // 保存按钮是否禁用
-      publishCourse: {},
+      coursePublish: {},
+      courseId: '', // 所属课程
     }
   },
 
@@ -41,14 +58,13 @@ export default {
       // 2 调用接口方法根据课程id查询
       this.getCoursePublishId()
     }
-    
   },
 
   methods: {
     // 根据课程id查询
     getCoursePublishId() {
       course.getCoursePublishInfo(this.courseId).then((response) => {
-        this.publishCourse = response.data.publishCourse
+        this.coursePublish = response.data.publishCourse
       })
     },
     previous() {

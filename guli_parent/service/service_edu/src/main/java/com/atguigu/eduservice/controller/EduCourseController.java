@@ -53,7 +53,7 @@ public class EduCourseController {
     @GetMapping("/getPublishCourseInfo/{id}")
     public Result getPublishCourseInfo(@PathVariable String id) {
         CoursePublishVo coursePublishVo = courseService.publishCourseInfo(id);
-        return Result.ok().data("publishCourse", coursePublishVo);
+        return Result.ok().data("publishCourseInfo", coursePublishVo);
     }
 
     // 课程最终发布

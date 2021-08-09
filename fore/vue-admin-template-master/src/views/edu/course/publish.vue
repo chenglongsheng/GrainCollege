@@ -63,16 +63,24 @@ export default {
   methods: {
     // 根据课程id查询
     getCoursePublishId() {
-      course.getCoursePublishInfo(this.courseId).then((response) => {
-        this.coursePublish = response.data.publishCourse
+      course.getPublishCourseInfo(this.courseId).then((response) => {
+        this.coursePublish = response.data.publishCourseInfo
       })
     },
     previous() {
-      this.$router.push({ path: '/course/chapter/1' })
+      this.$router.push({ path: '/course/chapter/' + this.courseId })
     },
 
     publish() {
-      this.$router.push({ path: '/course/list' })
+      course.publishCourse(this.courseId).then((response) => {
+        // 提示信息
+        this.$message({
+          type: 'success',
+          message: '课程发布成功！',
+        })
+        // 跳转页面
+        this.$router.push({ path: '/course/list' })
+      })
     },
   },
 }

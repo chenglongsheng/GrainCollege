@@ -43,5 +43,12 @@ export default {
             url: '/eduservice/course/publishCourse/' + id,
             method: 'post'
         })
+    },
+    // 课程列表
+    getCourseList() {
+        return request({
+            url: '/eduservice/course',
+            method: 'get'
+        })
     }
 }

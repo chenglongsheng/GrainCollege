@@ -118,6 +118,10 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         courseDescriptionService.removeById(courseId);
 
         //4 根据课程id删除课程
+        int result = baseMapper.deleteById(courseId);
+        if (result == 0) {
+            throw new GuliException(20001, "删除失败！");
+        }
 
     }
 }

@@ -22,7 +22,7 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
     @Override
     public void removeVideoByCourseId(String courseId) {
         QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
-        wrapper.eq("courseId", courseId);
+        wrapper.eq("course_id", courseId);
         baseMapper.delete(wrapper);
     }
 }

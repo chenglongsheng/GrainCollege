@@ -115,6 +115,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         chapterService.removeChapterByCourseId(courseId);
 
         //3 根据课程id删除描述
+        courseDescriptionService.removeById(courseId);
 
         //4 根据课程id删除课程
 

@@ -20,7 +20,7 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
 
     //1 根据课程id删除小节
     @Override
-    public void removeByCourseId(String courseId) {
+    public void removeVideoByCourseId(String courseId) {
         QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
         wrapper.eq("courseId", courseId);
         baseMapper.delete(wrapper);

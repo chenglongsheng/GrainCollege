@@ -76,5 +76,12 @@ public class EduCourseController {
         return Result.ok();
     }
 
+    // 删除课程
+    @DeleteMapping("{courseId}")
+    public Result deleteCourse(@PathVariable String courseId) {
+        courseService.removeCourse(courseId);
+        return Result.ok();
+    }
+
 }
 

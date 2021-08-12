@@ -114,7 +114,7 @@ export default {
         type: 'warning',
       }).then(() => {
         // 确定调用then
-        course.deleteTeacherById(id).then((response) => {
+        course.deleteCourseById(id).then((response) => {
           // 提示信息
           this.$message({
             type: 'success',

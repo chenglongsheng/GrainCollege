@@ -51,7 +51,7 @@
               >修改课程基本信息</el-button
             >
           </router-link>
-          <router-link :to="'/teacher/edit/' + scope.row.id">
+          <router-link :to="'/course/chapter/' + scope.row.id">
             <el-button type="primary" size="mini" icon="el-icon-edit"
               >修改课程大纲</el-button
             >

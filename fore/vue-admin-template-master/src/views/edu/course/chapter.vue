@@ -135,6 +135,7 @@ export default {
         sort: 0,
         free: 0,
         videoSourseId: '',
+        videoOriginalName: '',
       },
     }
   },
@@ -151,6 +152,14 @@ export default {
   },
 
   methods: {
+    // 上传视频成功
+    handleVodUploadSuccess(response, file, fileList) {
+      // 上传视频id赋值
+      this.video.videoSourseId = response.data.videoSourseId
+      // 上传视频名称赋值
+      this.video.videoOriginalName = file.name
+    },
+
     // --------------------------小节操作---------------------
     // 添加小节弹框
     openVideo(chapterId) {

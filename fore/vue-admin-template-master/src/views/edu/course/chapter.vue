@@ -122,7 +122,6 @@
             </el-tooltip>
           </el-upload>
         </el-form-item>
-        
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogVideoFormVisible = false">取 消</el-button>
@@ -160,6 +159,8 @@ export default {
         videoSourseId: '',
         videoOriginalName: '',
       },
+      fileList: [], // 上传文件列表
+      BASE_API: process.env.BASE_API, // 接口API地址
     }
   },
 

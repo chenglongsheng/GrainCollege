@@ -105,7 +105,7 @@
             :before-remove="beforeVodRemove"
             :on-exceed="handleUploadExceed"
             :file-list="fileList"
-            :action="BASE_API + '/admin/vod/video/upload'"
+            :action="BASE_API + '/eduvod/video/uploadAliyunVideo'"
             :limit="1"
             class="upload-demo"
           >

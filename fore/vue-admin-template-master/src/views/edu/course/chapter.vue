@@ -183,6 +183,9 @@ export default {
       // 上传视频名称赋值
       this.video.videoOriginalName = file.name
     },
+    handleVodRemove() {
+
+    },
 
     // --------------------------小节操作---------------------
     // 添加小节弹框

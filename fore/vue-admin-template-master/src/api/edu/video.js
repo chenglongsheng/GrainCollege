@@ -31,9 +31,9 @@ export default {
         })
     },
     // 删除视频
-    deleteAliyunVod() {
+    deleteAliyunVod(id) {
         return request({
-            url: '/eduservice/video/deleteAliyunVideo/' + id,
+            url: '/eduvod/video/deleteAliyunVideo/' + id,
             method: 'delete'
         })
     }

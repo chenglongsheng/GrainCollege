@@ -178,13 +178,35 @@ export default {
   methods: {
     // 上传视频成功
     handleVodUploadSuccess(response, file, fileList) {
-      // 上传视频id赋值
-      this.video.videoSourseId = response.data.videoSourseId
-      // 上传视频名称赋值
-      this.video.videoOriginalName = file.name
+        // 上传视频id赋值
+        this.video.videoSourseId = response.data.videoId
+        // 上传视频名称赋值
+        this.video.videoOriginalName = file.name
+        console.log(response.data)
+        console.log(this.video.videoSourseId)
     },
+    handleUploadExceed() {
+      this.$message.warning('想要重新上传，请先删除已经上传的视频')
+    },
+    // 调用确定
     handleVodRemove() {
-
+      // 调用接口的删除视频方法
+      video.deleteAliyunVod(this.video.videoSourseId).then((response) => {
+        // 提示信息
+        this.$message({
+          type: 'success',
+          message: '删除视频成功!',
+        })
+        // 文件列表清空
+        this.fileList = []
+        // 清空视频id和值
+        // this.video.videoSourseId = ''
+        // this.video.videoOriginalName = ''
+      })
+    },
+    // 调用X
+    beforeVodRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name} ?`)
     },
 
     // --------------------------小节操作---------------------
@@ -257,8 +279,8 @@ export default {
     },
 
     saveOrUpdateVideo() {
-      console.log(this.video)
-      if (this.video.id) {
+      // console.log(this.video)
+      if (!this.video.id) {
         this.addVideo()
       }
     },

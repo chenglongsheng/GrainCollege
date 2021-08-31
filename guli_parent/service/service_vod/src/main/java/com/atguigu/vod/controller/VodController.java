@@ -57,7 +57,7 @@ public class VodController {
 
     // 删除多个阿里云视频 参数有多个视频id
     @DeleteMapping("/delete-batch")
-    public Result deleteBatch(@RequestParam("videoIdList") List videoIdList) {
+    public Result deleteBatch(@RequestParam("videoIdList") List<String> videoIdList) {
         vodService.removeMoreAliyunVideo(videoIdList);
         return Result.ok();
     }

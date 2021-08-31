@@ -156,7 +156,7 @@ export default {
         title: '',
         sort: 0,
         free: 0,
-        videoSourseId: '',
+        videoSourceId: '',
         videoOriginalName: '',
       },
       fileList: [], // 上传文件列表
@@ -179,11 +179,11 @@ export default {
     // 上传视频成功
     handleVodUploadSuccess(response, file, fileList) {
         // 上传视频id赋值
-        this.video.videoSourseId = response.data.videoId
+        this.video.videoSourceId = response.data.videoId
         // 上传视频名称赋值
         this.video.videoOriginalName = file.name
         console.log(response.data)
-        console.log(this.video.videoSourseId)
+        console.log(this.video.videoSourceId)
     },
     handleUploadExceed() {
       this.$message.warning('想要重新上传，请先删除已经上传的视频')
@@ -191,7 +191,7 @@ export default {
     // 调用确定
     handleVodRemove() {
       // 调用接口的删除视频方法
-      video.deleteAliyunVod(this.video.videoSourseId).then((response) => {
+      video.deleteAliyunVod(this.video.videoSourceId).then((response) => {
         // 提示信息
         this.$message({
           type: 'success',
@@ -200,7 +200,7 @@ export default {
         // 文件列表清空
         this.fileList = []
         // 清空视频id和值
-        // this.video.videoSourseId = ''
+        // this.video.videoSourceId = ''
         // this.video.videoOriginalName = ''
       })
     },
@@ -218,7 +218,7 @@ export default {
       this.video.title = ''
       this.video.sort = 0
       this.video.free = 0
-      this.video.videoSourseId = ''
+      this.video.videoSourceId = ''
     },
     //
     // 点击编辑发出弹框并数据回显

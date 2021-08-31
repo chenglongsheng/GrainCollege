@@ -6,6 +6,7 @@ import com.atguigu.eduservice.client.VodClient;
 import com.atguigu.eduservice.entity.EduVideo;
 import com.atguigu.eduservice.service.EduVideoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -41,7 +42,7 @@ public class EduVideoController {
         EduVideo eduVideo = videoService.getById(id);
         String videoSourceId = eduVideo.getVideoSourceId();
         // 判断小节中是否有视频id
-        if (videoSourceId != null) {
+        if (!StringUtils.isEmpty(videoSourceId)) {
             vodClient.deleteAliyunVideo(videoSourceId); //删除视频
         }
         videoService.removeById(id);//删除小节

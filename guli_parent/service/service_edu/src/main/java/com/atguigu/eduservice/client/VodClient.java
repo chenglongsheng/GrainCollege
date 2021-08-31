@@ -16,7 +16,7 @@ public interface VodClient {
 
     //定义调用的方法路径
     // 根据视频id删除阿里云视频
-    @DeleteMapping("/eduvod/video/deleteAliyunVideo/{id}")
-    public Result deleteAliyunVideo(@PathVariable String id);
+    @DeleteMapping(value = "/eduvod/video/deleteAliyunVideo/{id}")
+    public Result deleteAliyunVideo(@PathVariable("id") String id);
 
 }

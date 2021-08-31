@@ -199,9 +199,9 @@ export default {
         })
         // 文件列表清空
         this.fileList = []
-        // 清空视频id和值
-        // this.video.videoSourceId = ''
-        // this.video.videoOriginalName = ''
+        清空视频id和值
+        this.video.videoSourceId = ''
+        this.video.videoOriginalName = ''
       })
     },
     // 调用X

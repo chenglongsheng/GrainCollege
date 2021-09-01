@@ -24,16 +24,30 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
-    extend (config, { isDev, isClient }) {
+    extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
+          exclude: /(node_modules)/,
+          options: {
+            fix: true,
+          }
         })
       }
     }
-  }
+  },
+  plugins: [
+
+    { src: '~/plugins/nuxt-swiper-plugin.js', ssr: false }
+
+  ],
+
+  css: [
+
+    'swiper/dist/css/swiper.css'
+
+  ]
 }
 

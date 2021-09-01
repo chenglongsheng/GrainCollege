@@ -178,12 +178,12 @@ export default {
   methods: {
     // 上传视频成功
     handleVodUploadSuccess(response, file, fileList) {
-        // 上传视频id赋值
-        this.video.videoSourceId = response.data.videoId
-        // 上传视频名称赋值
-        this.video.videoOriginalName = file.name
-        console.log(response.data)
-        console.log(this.video.videoSourceId)
+      // 上传视频id赋值
+      this.video.videoSourceId = response.data.videoId
+      // 上传视频名称赋值
+      this.video.videoOriginalName = file.name
+      console.log(response.data)
+      console.log(this.video.videoSourceId)
     },
     handleUploadExceed() {
       this.$message.warning('想要重新上传，请先删除已经上传的视频')
@@ -282,6 +282,8 @@ export default {
       // console.log(this.video)
       if (!this.video.id) {
         this.addVideo()
+      } else {
+        this.updateVideo()
       }
     },
 

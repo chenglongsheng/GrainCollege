@@ -2,6 +2,23 @@
 
   <div>
     <!-- 幻灯片 开始 -->
+    <div v-swiper:mySwiper="swiperOption">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background: #040B1B;">
+          <a target="_blank" href="/">
+            <img src="~/assets/photo/banner/1525939573202.jpg" alt="首页banner">
+          </a>
+        </div>
+        <div class="swiper-slide" style="background: #040B1B;">
+          <a target="_blank" href="/">
+            <img src="~/assets/photo/banner/1525939573202.jpg" alt="首页banner">
+          </a>
+        </div>
+      </div>
+      <div class="swiper-pagination swiper-pagination-white"/>
+      <div slot="button-prev" class="swiper-button-prev swiper-button-white"/>
+      <div slot="button-next" class="swiper-button-next swiper-button-white"/>
+    </div>
     <!-- 幻灯片 结束 -->
 
     <div id="aCoursesList">

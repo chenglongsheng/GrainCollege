@@ -6,10 +6,7 @@ import com.atguigu.cmsservice.service.CrmBannerService;
 import com.atguigu.commonutils.Result;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -34,6 +31,34 @@ public class CrmBannerAdminUserController {
         bannerService.page(pageBanner, null);
 
         return Result.ok().data("items", pageBanner.getRecords()).data("total", pageBanner.getTotal());
+    }
+
+    //2 增加
+    @PostMapping("/addBanner")
+    public Result addBanner(@RequestBody CrmBanner crmBanner) {
+        bannerService.save(crmBanner);
+        return Result.ok();
+    }
+
+    //3 删除
+    @DeleteMapping("/removeBanner/{id}")
+    public Result removeBanner(@PathVariable String id) {
+        bannerService.removeById(id);
+        return Result.ok();
+    }
+
+    //4 修改
+    @PostMapping("/updateBanner")
+    public Result updateBanner(@RequestBody CrmBanner crmBanner) {
+        bannerService.updateById(crmBanner);
+        return Result.ok();
+    }
+
+    //5 查找
+    @GetMapping("/getBanner/{id}")
+    public Result getBanner(@PathVariable String id) {
+        CrmBanner crmBanner = bannerService.getById(id);
+        return Result.ok().data("crmBanner", crmBanner);
     }
 
 }

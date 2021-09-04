@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2021-09-01
  */
 @RestController
-@RequestMapping("/cmsservice/bannerAdmin")
+@RequestMapping("/educms/bannerAdmin")
 @CrossOrigin
 public class CrmBannerAdminUserController {
 

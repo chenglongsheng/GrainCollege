@@ -18,7 +18,7 @@ import java.util.List;
  * @create 2021-09-01 21:10
  */
 @RestController
-@RequestMapping("/cmsservice/bannerUser")
+@RequestMapping("/educms/bannerUser")
 @CrossOrigin
 public class CrmBannerUserController {
 

@@ -489,6 +489,7 @@
 
 <script>
 import banner from '@/api/banner'
+import index from '@/api/index'
 export default {
   data() {
     return {
@@ -504,18 +505,27 @@ export default {
         }
       },
       // 导航数据
-      bannerList: []
+      bannerList: [],
+      courseList: [],
+      teacherList: []
     }
   },
   created() {
     this.getBannerList()
-    console.log(this.bannerList)
+    this.getIndexInfo()
   },
   methods: {
     // 查询banner数据
     getBannerList() {
       banner.getListBanner().then((response) => {
         this.bannerList = response.data.data.list
+      })
+    },
+    // 查询热门课程和名师
+    getIndexInfo() {
+      index.getIndex().then((response) => {
+        this.courseList = response.data.data.courseList
+        this.teacherList = response.data.data.teacherList
       })
     }
   }

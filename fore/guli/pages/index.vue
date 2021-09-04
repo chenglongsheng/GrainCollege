@@ -369,6 +369,7 @@
 </template>
 
 <script>
+import banner from '@/api/banner'
 export default {
   data() {
     return {
@@ -382,7 +383,20 @@ export default {
           nextEl: '.swiper-button-next', // 下一页dom节点
           prevEl: '.swiper-button-prev'// 前一页dom节点
         }
-      }
+      },
+      // 导航数据
+      bannerList: []
+    }
+  },
+  created() {
+    this.getListBanner()
+  },
+  methods: {
+    // 查询banner数据
+    getListBanner() {
+      banner.getBannerList().then(reponse => {
+        this.bannerList = reponse.data.data.list
+      })
     }
   }
 }

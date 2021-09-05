@@ -168,8 +168,10 @@ export default {
     },
     // 查询热门课程和名师
     getIndexInfo() {
-      index.getIndex().then((response) => {
+      index.getIndexCourse().then((response) => {
         this.courseList = response.data.data.courseList
+      })
+      index.getIndexTeacher().then((response) => {
         this.teacherList = response.data.data.teacherList
       })
     }

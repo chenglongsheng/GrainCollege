@@ -1,4 +1,4 @@
-package com.atguigu.oss;
+package com.atguigu.ossservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

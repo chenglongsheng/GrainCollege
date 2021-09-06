@@ -1,4 +1,4 @@
-package com.atguigu.vod;
+package com.atguigu.vodservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

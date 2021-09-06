@@ -1,9 +1,9 @@
-package com.atguigu.oss.service.Impl;
+package com.atguigu.ossservice.service.Impl;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
-import com.atguigu.oss.service.OssService;
-import com.atguigu.oss.utils.ConstantPropertiesUtils;
+import com.atguigu.ossservice.service.OssService;
+import com.atguigu.ossservice.utils.ConstantPropertiesUtils;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

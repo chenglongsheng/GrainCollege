@@ -1,4 +1,4 @@
-package com.atguigu.vod.service;
+package com.atguigu.vodservice.service;
 
 import org.springframework.web.multipart.MultipartFile;
 

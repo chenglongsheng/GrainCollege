@@ -1,12 +1,12 @@
-package com.atguigu.vod.controller;
+package com.atguigu.vodservice.controller;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
 import com.atguigu.commonutils.Result;
 import com.atguigu.servicebase.exceptionhandler.GuliException;
-import com.atguigu.vod.service.VodService;
-import com.atguigu.vod.utils.ConstantVodUtils;
-import com.atguigu.vod.utils.InitVodClient;
+import com.atguigu.vodservice.service.VodService;
+import com.atguigu.vodservice.utils.ConstantVodUtils;
+import com.atguigu.vodservice.utils.InitVodClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

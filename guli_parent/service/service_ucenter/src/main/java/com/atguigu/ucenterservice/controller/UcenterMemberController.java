@@ -24,7 +24,7 @@ public class UcenterMemberController {
     private UcenterMemberService memberService;
 
     // login
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Result login(@RequestBody UcenterMember member) {
         String token = memberService.login(member);
         return Result.ok().data("token", token);

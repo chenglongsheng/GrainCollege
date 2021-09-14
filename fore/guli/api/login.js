@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import cookie from 'js-cookie'
 export default {
   // 登录
   submitLogin(userInfo) {
@@ -12,8 +13,8 @@ export default {
   getLoginInfo() {
     return request({
       url: `/ucenterservice/apimember/auth/getLoginInfo`,
-      method: 'get'
-      // headers: {'token': cookie.get('guli_token')}
+      method: 'get',
+      headers: { 'token': cookie.get('guli_token') }
     })
     // headers: {'token': cookie.get('guli_token')}
   }

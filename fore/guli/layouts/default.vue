@@ -135,5 +135,34 @@ import '~/assets/css/theme.css'
 import '~/assets/css/global.css'
 import '~/assets/css/web.css'
 
-export default {}
+import cookie from 'js-cookie'
+export default {
+  data() {
+    return {
+      token: '',
+      loginInfo: {
+        id: '',
+        age: '',
+        avatar: '',
+        mobile: '',
+        nikename: '',
+        sex: ''
+      }
+    }
+  },
+  created() {
+
+  },
+  methods: {
+    // 从cookie获取信息
+    showInfo() {
+      var userStr = cookie.get('guli-ucenter')// "{'key':'value','key':'value','key':'value'}"
+      // 把字符串转换为json数据
+      if (userStr) {
+        this.loginInfo = JSON.parse(userStr)
+      }
+    }
+
+  }
+}
 </script>

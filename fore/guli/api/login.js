@@ -12,7 +12,7 @@ export default {
   // 根据token获取用户信息
   getLoginInfo() {
     return request({
-      url: `/ucenterservice/apimember/auth/getLoginInfo`,
+      url: `/ucenterservice/ucenter-member/getMemberInfo`,
       method: 'get',
       headers: { 'token': cookie.get('guli_token') }
     })

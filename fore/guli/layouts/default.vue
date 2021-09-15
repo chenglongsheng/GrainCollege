@@ -152,7 +152,6 @@ export default {
   },
   created() {
     this.showInfo()
-    // console.log(this.loginInfo)
   },
   methods: {
     // 从cookie获取信息

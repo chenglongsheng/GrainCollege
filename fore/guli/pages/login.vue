@@ -67,9 +67,10 @@ export default {
           cookie.set('guli_token', response.data.data.token, { domain: 'localhost' })
           // 登录成功根据token获取用户信息
           loginApi.getLoginInfo().then(response => {
-            this.loginInfo = response.data.data.item
+            this.loginInfo = response.data.data.memberInfo
             // 将用户信息记录cookie
-            cookie.set('guli_ucenter', this.loginInfo, { domain: 'localhost' })
+            var str = JSON.stringify(this.loginInfo)
+            cookie.set('guli_ucenter', str, { domain: 'localhost' })
             // 跳转页面
             window.location.href = '/'
           })

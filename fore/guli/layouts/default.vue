@@ -161,8 +161,14 @@ export default {
       if (userStr) {
         this.loginInfo = JSON.parse(userStr)
       }
+    },
+    // 退出(清空cookie中的值)
+    logout() {
+      cookie.set('guli_token', '', { domain: 'localhost' })
+      cookie.set('guli_ucenter', '', { domain: 'localhost' })
+      // 回到首页
+      window.location.href = '/'
     }
-
   }
 }
 </script>

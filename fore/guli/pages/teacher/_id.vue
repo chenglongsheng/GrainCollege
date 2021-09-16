@@ -110,5 +110,17 @@
   </div>
 </template>
 <script>
-export default {}
+import teacherApi from '@/api/teacher'
+
+export default {
+  // 异步调用
+  asyncData({ params, error }) {
+    return teacherApi.getTeacherInfo(params.id).then(response => {
+      return {
+        teacher: response.data.data.teacher,
+        courseList: response.data.data.courseList
+      }
+    })
+  }
+}
 </script>

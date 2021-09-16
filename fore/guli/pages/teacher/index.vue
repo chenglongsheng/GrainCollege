@@ -26,12 +26,12 @@
               <li v-for="teacher in data.items" :key="teacher.id">
                 <section class="i-teach-wrap">
                   <div class="i-teach-pic">
-                    <a :title="teacher.name" href="/teacher/1" target="_blank">
+                    <a :title="teacher.name" :href="'/teacher/'+teacher.id" target="_blank">
                       <img :src="teacher.avatar" :alt="teacher.name">
                     </a>
                   </div>
                   <div class="mt10 hLh30 txtOf tac">
-                    <a :title="teacher.name" href="/teacher/1" target="_blank" class="fsize18 c-666">{{ teacher.name }}</a>
+                    <a :title="teacher.name" :href="'/teacher/'+teacher.id" target="_blank" class="fsize18 c-666">{{ teacher.name }}</a>
                   </div>
                   <div class="hLh30 txtOf tac">
                     <span class="fsize14 c-999">{{ teacher.intro }}</span>

@@ -6,5 +6,12 @@ export default {
       url: `/eduservice/teacherfront/getTeacherList/${page}/${limit}`,
       method: 'post'
     })
+  },
+  // 讲师详情
+  getTeacherInfo(teacherId) {
+    return request({
+      url: `/eduservice/teacherfront/getTeacherFrontInfo/${teacherId}`,
+      method: 'get'
+    })
   }
 }

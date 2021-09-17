@@ -18,6 +18,7 @@ import java.util.Map;
  * @create 2021-09-16 15:49
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/eduservice/teacherfront")
 public class TeacherFrontController {
 

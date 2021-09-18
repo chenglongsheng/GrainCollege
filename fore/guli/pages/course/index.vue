@@ -18,7 +18,7 @@
                 <li>
                   <a title="全部" href="#">全部</a>
                 </li>
-                <li v-for="(item,index) in subjectNestedList" :key="index">
+                <li v-for="(item,index) in subjectNestedList" :key="index" @click="searchSubject(item.id,index)">
                   <a :title="item.title" href="#">{{ item.title }}</a>
                 </li>
               </ul>
@@ -179,6 +179,16 @@ export default {
       courseApi.getCourseList(page, 8, this.searchObj).then(response => {
         this.data = response.data.data
       })
+    },
+    // 获取课程分类
+    searchSubject(oneSubjectId, index) {
+      // 根据id获取所有一级分类
+      for (var i = 0; i < this.subjectNestedList.length; i++) {
+        var subject = this.subjectNestedList[i]
+        if (subject.id === oneSubjectId) {
+          this.subSubjectList = subject.children
+        }
+      }
     }
   }
 }

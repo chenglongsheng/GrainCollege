@@ -182,6 +182,11 @@ export default {
     },
     // 获取课程分类
     searchSubject(oneSubjectId, index) {
+      // 一级分类id赋值给searchObj
+      this.searchObj.subjectParentId = oneSubjectId
+      // 点击一级分类进行条件查询
+      this.gotoPage(1)
+
       // 根据id获取所有一级分类
       for (var i = 0; i < this.subjectNestedList.length; i++) {
         var subject = this.subjectNestedList[i]

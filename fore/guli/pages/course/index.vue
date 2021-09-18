@@ -82,7 +82,7 @@
                     <a :title="course.title" href="/course/1" class="course-title fsize18 c-333">{{ course.title }}</a>
                   </h3>
                   <section class="mt10 hLh20 of">
-                    <span class="fr jgTag bg-green">
+                    <span v-if="Number(course.price) === 0" class="fr jgTag bg-green">
                       <i class="c-fff fsize12 f-fA">免费</i>
                     </span>
                     <span class="fl jgAttr c-ccc f-fA">

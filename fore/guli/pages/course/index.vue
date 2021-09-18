@@ -18,8 +18,8 @@
                 <li>
                   <a title="全部" href="#">全部</a>
                 </li>
-                <li v-for="(item,index) in subjectNestedList" :key="index" @click="searchSubject(item.id,index)">
-                  <a :title="item.title" href="#">{{ item.title }}</a>
+                <li v-for="(item,index) in subjectNestedList" :key="index" :class="{active:oneIndex==index}" >
+                  <a :title="item.title" href="#" @click="searchSubject(item.id,index)">{{ item.title }}</a>
                 </li>
               </ul>
             </dd>
@@ -182,6 +182,11 @@ export default {
     },
     // 获取课程分类
     searchSubject(oneSubjectId, index) {
+      // 把传递index值赋值给oneIndex，使得active样式生效
+      this.oneIndex = index
+      this.twoIndex = -1
+      this.searchObj.subjectParentId = ''
+      this.subSubjectList = []
       // 一级分类id赋值给searchObj
       this.searchObj.subjectParentId = oneSubjectId
       // 点击一级分类进行条件查询
@@ -198,3 +203,14 @@ export default {
   }
 }
 </script>
+<style scoped>
+  .active {
+    background: #bdbdbd;
+  }
+  .hide {
+    display: none;
+  }
+  .show {
+    display: block;
+  }
+</style>

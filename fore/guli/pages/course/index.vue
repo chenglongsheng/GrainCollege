@@ -47,15 +47,19 @@
           </section>
           <section class="fl">
             <ol class="js-tap clearfix">
-              <li>
-                <a title="关注度" href="#">关注度</a>
+              <li :class="{'current bg-orange':buyCountSort!=''}">
+                <a title="销量" href="javascript:void(0);" @click="searchBuyCount()">销量
+                  <span :class="{hide:buyCountSort==''}">↓</span>
+                </a>
               </li>
-              <li>
-                <a title="最新" href="#">最新</a>
+              <li :class="{'current bg-orange':gmtCreateSort!=''}">
+                <a title="最新" href="javascript:void(0);" @click="searchGmtCreate()">最新
+                  <span :class="{hide:gmtCreateSort==''}">↓</span>
+                </a>
               </li>
-              <li class="current bg-orange">
-                <a title="价格" href="#">价格&nbsp;
-                  <span>↓</span>
+              <li :class="{'current bg-orange':priceSort!=''}">
+                <a title="价格" href="javascript:void(0);" @click="searchPrice()">价格&nbsp;
+                  <span :class="{hide:priceSort==''}">↓</span>
                 </a>
               </li>
             </ol>
@@ -205,6 +209,21 @@ export default {
       this.twoIndex = index
       this.searchObj.subjectId = twoSubjectId
       // 点击二级分类进行条件查询
+      this.gotoPage(1)
+    },
+    //  根据销量排序
+    searchBuyCount() {
+      // 设置对应变量值，为了样式生效
+      this.buyCountSort = '1'
+      this.gmtCreateSort = ''
+      this.priceSort = ''
+
+      //  复制到searchObj
+      this.searchObj.buyCountSort = this.buyCountSort
+      this.searchObj.gmtCreateSort = this.gmtCreateSort
+      this.searchObj.priceSort = this.priceSort
+
+      // 调用方法查询
       this.gotoPage(1)
     }
   }

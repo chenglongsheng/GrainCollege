@@ -240,6 +240,21 @@ export default {
 
       // 调用方法查询
       this.gotoPage(1)
+    },
+    // 根据价格排序
+    searchPrice() {
+      // 设置对应变量值，为了样式生效
+      this.buyCountSort = ''
+      this.gmtCreateSort = ''
+      this.priceSort = '1'
+
+      //  复制到searchObj
+      this.searchObj.buyCountSort = this.buyCountSort
+      this.searchObj.gmtCreateSort = this.gmtCreateSort
+      this.searchObj.priceSort = this.priceSort
+
+      // 调用方法查询
+      this.gotoPage(1)
     }
   }
 }

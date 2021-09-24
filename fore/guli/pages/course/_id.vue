@@ -173,5 +173,16 @@
 </template>
 
 <script>
-export default {}
+import courseApi from '@/api/course'
+
+export default {
+  asyncData({ params, error }) {
+    return courseApi.getCourseInfo(params.id).then(response => {
+      return {
+        courseWebVo: response.data.data.courseWebVo,
+        chapterVideoList: response.data.data.chapterVideoList
+      }
+    })
+  }
+}
 </script>

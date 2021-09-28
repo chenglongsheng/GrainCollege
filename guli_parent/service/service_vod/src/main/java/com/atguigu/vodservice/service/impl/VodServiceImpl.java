@@ -93,9 +93,8 @@ public class VodServiceImpl implements VodService {
 
             //获取凭证
             GetVideoPlayAuthResponse response = client.getAcsResponse(request);
-            String playAuth = response.getPlayAuth();
 
-            return playAuth;
+            return response.getPlayAuth();
 
         } catch (Exception e) {
             e.printStackTrace();

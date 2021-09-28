@@ -14,4 +14,7 @@ public interface VodService {
 
     // 删除多个阿里云视频 参数有多个视频id
     void removeMoreAliyunVideo(List videoIdList);
+
+    // 根据视频id获取视频凭证
+    String getPlayAuth(String id);
 }

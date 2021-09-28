@@ -62,4 +62,11 @@ public class VodController {
         return Result.ok();
     }
 
+    // 根据视频id获取视频凭证
+    @GetMapping("/getPlayAuth/{id}")
+    public Result getPlayAuth(@PathVariable String id) {
+        String playAuth = vodService.getPlayAuth(id);
+        return Result.ok().data("playAuth", playAuth);
+    }
+
 }

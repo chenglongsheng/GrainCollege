@@ -6,6 +6,7 @@ import com.atguigu.commonutils.Result;
 import com.atguigu.ucenterservice.entity.UcenterMember;
 import com.atguigu.ucenterservice.entity.vo.RegisterVo;
 import com.atguigu.ucenterservice.service.UcenterMemberService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,6 +50,16 @@ public class UcenterMemberController {
         // 查询数据库，根据用户id获取用户信息
         UcenterMember member = memberService.getById(memberId);
         return Result.ok().data("memberInfo", member);
+    }
+
+    //根据token获取用户信息
+    @PostMapping("/getUserInfo/{id}")
+    public com.atguigu.commonutils.vo.UcenterMember getUserInfo(@PathVariable String id) {
+
+        UcenterMember ucenterMember = memberService.getById(id);
+        com.atguigu.commonutils.vo.UcenterMember member = new com.atguigu.commonutils.vo.UcenterMember();
+        BeanUtils.copyProperties(ucenterMember, member);
+        return member;
     }
 
 }
